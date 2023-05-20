@@ -83,4 +83,35 @@ public class Main {
     }
 
 
+
+    /**
+     * Calculates the maximum area formed by vertical lines and an array of heights.
+     * The area is determined by the width between two vertical lines (indices) and the minimum height among them.
+     * This method implements the two-pointer approach to optimize the computation.
+     *
+     * @param height An array of integers representing the heights of the vertical lines.
+     * @return The maximum area formed by the vertical lines.
+     */
+    public int maxArea(int[] height) {
+        int left = 0;
+        int right = height.length - 1;
+        int maxArea = 0;
+
+        while (left < right) {
+            int currentHeight = Math.min(height[left], height[right]);
+            int currentWidth = right - left;
+            int currentArea = currentHeight * currentWidth;
+            maxArea = Math.max(maxArea, currentArea);
+
+            if (height[left] <= height[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+        return maxArea;
+    }
+
+
 }
