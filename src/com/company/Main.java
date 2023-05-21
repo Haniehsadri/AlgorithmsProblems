@@ -146,4 +146,33 @@ public class Main {
     }
 
 
+    /**
+     * Returns the length of the longest substring without repeating characters in the given string.
+     *
+     * @param s the input string
+     * @return the length of the longest substring without repeating characters
+     */
+    public int lengthOfLongestSubstring(String s) {
+        int maxLength = 0;
+        int[] lastOccurrence = new int[256];
+        Arrays.fill(lastOccurrence, -1);
+        int left = 0;
+
+        for (int right = 0; right < s.length(); right++) {
+            char currentChar = s.charAt(right);
+            int lastSeenIndex = lastOccurrence[currentChar];
+
+            if (lastSeenIndex >= left) {
+                left = lastSeenIndex + 1;
+            }
+
+            lastOccurrence[currentChar] = right;
+            maxLength = Math.max(maxLength, right - left + 1);
+        }
+
+        return maxLength;
+    }
+
+
+
 }
