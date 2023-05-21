@@ -1,9 +1,6 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Main {
 
@@ -81,7 +78,6 @@ public class Main {
 
         return result;
     }
-
 
 
     /**
@@ -173,6 +169,40 @@ public class Main {
         return maxLength;
     }
 
+
+    /**
+     * Checks if a string containing parentheses, brackets, and braces is valid.
+     *
+     * @param s the string to be checked
+     * @return true if the string is valid, false otherwise
+     */
+    public boolean isValid(String s) {
+        if (s.length() % 2 != 0) {
+            return false; // Early termination if the string length is odd
+        }
+
+        Stack<Character> stack = new Stack<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+
+            if (c == '(' || c == '{' || c == '[') {
+                stack.push(c);
+            } else {
+                if (stack.isEmpty() || !isMatchingPair(stack.pop(), c)) {
+                    return false;
+                }
+            }
+        }
+
+        return stack.isEmpty();
+    }
+
+    private boolean isMatchingPair(char open, char close) {
+        return (open == '(' && close == ')') ||
+                (open == '{' && close == '}') ||
+                (open == '[' && close == ']');
+    }
 
 
 }
