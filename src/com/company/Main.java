@@ -114,4 +114,36 @@ public class Main {
     }
 
 
+    /**
+     * Calculates the maximum profit that can be obtained from a given array of prices.
+     * The maximum profit is the difference between the highest selling price and the lowest buying price.
+     * If no profit can be obtained, returns 0.
+     *
+     * @param prices an array of prices
+     * @return the maximum profit that can be obtained
+     */
+    public int maxProfit2(int[] prices) {
+        if (prices == null || prices.length <= 1) {
+            return 0; // Edge case: no profit can be obtained
+        }
+
+        int maxProfit = 0;
+        int minPrice = prices[0];
+
+        for (int i = 1; i < prices.length; i++) {
+            int currentPrice = prices[i];
+            if (currentPrice < minPrice) {
+                minPrice = currentPrice; // Update the minimum buying price
+            } else {
+                int profit = currentPrice - minPrice;
+                if (profit > maxProfit) {
+                    maxProfit = profit; // Update the maximum profit
+                }
+            }
+        }
+
+        return maxProfit;
+    }
+
+
 }
