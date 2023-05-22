@@ -204,5 +204,27 @@ public class Main {
                 (open == '[' && close == ']');
     }
 
+    /**
+     * Finds the minimum value in an array of integers using a binary search-like approach.
+     *
+     * @param nums  the array of integers
+     * @param left  the left index of the subarray to search
+     * @param right the right index of the subarray to search
+     * @return the minimum value in the array
+     */
+    public int findMin(int[] nums, int left, int right) {
+        if (left >= right) {
+            return nums[left];
+        }
+
+        int mid = left + (right - left) / 2;
+
+        if (nums[mid] > nums[right]) {
+            return findMin(nums, mid + 1, right);
+        } else {
+            return findMin(nums, left, mid);
+        }
+    }
+
 
 }
