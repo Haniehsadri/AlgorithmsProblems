@@ -2,6 +2,7 @@ package com.company;
 
 import java.util.*;
 
+
 public class Main {
 
     public static void main(String[] args) {
@@ -227,25 +228,7 @@ public class Main {
     }
 
 
-    /**
-     * Reverses a linked list.
-     *
-     * @param head The head node of the linked list.
-     * @return The new head node of the reversed linked list.
-     */
-    public ListNode reverseList(ListNode head) {
-        ListNode current = head;
-        ListNode prev = null;
 
-        while (current != null) {
-            ListNode next = current.next;
-            current.next = prev;
-            prev = current;
-            current = next;
-        }
-
-        return prev;
-    }
 
 
 }
