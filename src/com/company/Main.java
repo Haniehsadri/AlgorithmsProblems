@@ -228,6 +228,51 @@ public class Main {
     }
 
 
+    /**
+     * Calculates the number of unique paths from the top-left corner to the bottom-right corner
+     * in a grid of size m x n.
+     *
+     * @param m The number of rows in the grid.
+     * @param n The number of columns in the grid.
+     * @return The number of unique paths from the top-left corner to the bottom-right corner.
+     */
+    public int uniquePaths(int m, int n) {
+        int[][] memo = new int[m][n];
+        return uniquePaths(0, 0, m, n, memo);
+    }
+
+    /**
+     * Helper method to calculate the number of unique paths from a given position (i, j)
+     * to the bottom-right corner in a grid of size m x n.
+     *
+     * @param i The current row index.
+     * @param j The current column index.
+     * @param m The number of rows in the grid.
+     * @param n The number of columns in the grid.
+     * @param memo The memoization array to store previously calculated results.
+     * @return The number of unique paths from the current position to the bottom-right corner.
+     */
+    private int uniquePaths(int i, int j, int m, int n, int[][] memo) {
+        if (i == m - 1 && j == n - 1) {
+            return 1;
+        }
+
+        if (i >= m || j >= n) {
+            return 0;
+        }
+
+        if (memo[i][j] != 0) {
+            return memo[i][j];
+        }
+
+        int rightPaths = uniquePaths(i, j + 1, m, n, memo);
+        int downPaths = uniquePaths(i + 1, j, m, n, memo);
+        memo[i][j] = rightPaths + downPaths;
+        return memo[i][j];
+    }
+
+
+
 
 
 
