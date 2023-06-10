@@ -273,6 +273,42 @@ public class Main {
 
 
 
+    Arman Yousef Zadeh
+    Mon, Jun 5, 9:41 AM (5 days ago)
+    to me
+
+    /**
+     * Returns the diameter of a binary tree.
+     *
+     * @param root The root node of the binary tree.
+     * @return The diameter of the binary tree.
+     */
+    public int diameterOfBinaryTree(TreeNode root) {
+        calculateMaxDepth(root);
+        return max;
+    }
+
+    /**
+     * Calculates and updates the maximum diameter of a given node in a binary tree.
+     * Returns the maximum depth of the given node.
+     *
+     * @param node The node for which to calculate the maximum depth.
+     * @return The maximum depth of the given node.
+     */
+    private int calculateMaxDepth(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+
+        int leftDepth = calculateMaxDepth(node.left);
+        int rightDepth = calculateMaxDepth(node.right);
+
+        max = Math.max(max, leftDepth + rightDepth);
+
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+
+
 
 
 
