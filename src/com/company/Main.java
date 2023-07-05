@@ -273,9 +273,6 @@ public class Main {
 
 
 
-    Arman Yousef Zadeh
-    Mon, Jun 5, 9:41 AM (5 days ago)
-    to me
 
     /**
      * Returns the diameter of a binary tree.
@@ -306,6 +303,28 @@ public class Main {
         max = Math.max(max, leftDepth + rightDepth);
 
         return Math.max(leftDepth, rightDepth) + 1;
+    }
+
+    /**
+     * Determines whether it is possible to reach the last index in the given array by making jumps from the starting index.
+     *
+     * @param nums An array of non-negative integers representing the maximum jump length from each position.
+     * @return {@code true} if it is possible to reach the last index, {@code false} otherwise.
+     * @throws IllegalArgumentException if the input array is null or empty.
+     */
+    public boolean canJump(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            throw new IllegalArgumentException("Input array cannot be null or empty.");
+        }
+
+        int goal = nums.length - 1;
+        for (int i = nums.length - 2; i >= 0; i--) {
+            if (i + nums[i] >= goal) {
+                goal = i;
+            }
+        }
+
+        return goal == 0;
     }
 
 
