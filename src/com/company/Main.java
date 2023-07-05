@@ -329,6 +329,54 @@ public class Main {
 
 
 
+    /**
+     * Returns a list of integers representing the elements of a matrix traversed in spiral order.
+     *
+     * @param matrix the input matrix
+     * @return a list of integers in spiral order
+     */
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> result = new ArrayList<>();
+
+        int topRow = 0;
+        int bottomRow = matrix.length - 1;
+        int leftColumn = 0;
+        int rightColumn = matrix[0].length - 1;
+
+        while (topRow <= bottomRow && leftColumn <= rightColumn) {
+            // Traverse top row
+            for (int i = leftColumn; i <= rightColumn; i++) {
+                result.add(matrix[topRow][i]);
+            }
+            topRow++;
+
+            // Traverse right column
+            for (int j = topRow; j <= bottomRow; j++) {
+                result.add(matrix[j][rightColumn]);
+            }
+            rightColumn--;
+
+            // Traverse bottom row if applicable
+            if (topRow <= bottomRow) {
+                for (int j = rightColumn; j >= leftColumn; j--) {
+                    result.add(matrix[bottomRow][j]);
+                }
+                bottomRow--;
+            }
+
+            // Traverse left column if applicable
+            if (leftColumn <= rightColumn) {
+                for (int j = bottomRow; j >= topRow; j--) {
+                    result.add(matrix[j][leftColumn]);
+                }
+                leftColumn++;
+            }
+        }
+
+        return result;
+    }
+
+
 
 
 }
