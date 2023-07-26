@@ -378,5 +378,55 @@ public class Main {
 
 
 
+    /**
+     * Rotates the given matrix 90 degrees clockwise.
+     *
+     * @param matrix The matrix to be rotated.
+     */
+    public void rotate(int[][] matrix) {
+        transpose(matrix);
+        reverseRows(matrix);
+    }
+
+    /**
+     * Transposes the given matrix.
+     *
+     * @param matrix The matrix to be transposed.
+     */
+    public void transpose(int[][] matrix) {
+        int n = matrix.length;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+    }
+
+    /**
+     * Reverses the order of elements in each row of the given matrix.
+     *
+     * @param matrix The matrix to be processed.
+     */
+    public void reverseRows(int[][] matrix) {
+        int n = matrix.length;
+        for (int i = 0; i < n; i++) {
+            int left = 0;
+            int right = n - 1;
+            while (left < right) {
+                int temp = matrix[i][left];
+                matrix[i][left] = matrix[i][right];
+                matrix[i][right] = temp;
+                left++;
+                right--;
+            }
+        }
+    }
+
+
+
+
+
 
 }
