@@ -454,6 +454,41 @@ public class Main {
 
 
 
+    /**
+     * Adds two numbers represented by two linked lists. Each node contains a single digit.
+     * The digits are stored in reverse order, meaning that the 1's digit is at the head of the list.
+     *
+     * @param l1 The first linked list representing the first number.
+     * @param l2 The second linked list representing the second number.
+     * @return A linked list representing the sum of the two numbers.
+     */
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode dummyHead = new ListNode(0);
+        ListNode current = dummyHead, current1 = l1, current2 = l2;
+        int carry = 0;
+
+        while (current1 != null || current2 != null) {
+            int x = (current1 != null) ? current1.val : 0;
+            int y = (current2 != null) ? current2.val : 0;
+
+            int sum = carry + x + y;
+            carry = sum / 10;
+
+            current.next = new ListNode(sum % 10);
+            current = current.next;
+
+            if (current1 != null) current1 = current1.next;
+            if (current2 != null) current2 = current2.next;
+        }
+
+        if (carry > 0) {
+            current.next = new ListNode(carry);
+        }
+
+        return dummyHead.next;
+    }
+
+
 
 
 
