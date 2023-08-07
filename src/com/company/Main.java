@@ -422,6 +422,34 @@ public class Main {
                 right--;
             }
         }
+
+    }
+
+
+
+    /**
+            * Calculates the number of days to wait for a warmer temperature for each given day.
+ *
+         * For each day's temperature in the input array, this method determines how many days
+            * one would have to wait for a temperature that's warmer. If no warmer temperature is
+            * found in the subsequent days, the result for that day is set to 0.
+            *
+            * @param dailyTemps An array of daily temperatures.
+            * @return An array representing the number of days to wait for a warmer temperature for each day.
+            */
+    public int[] daysToWaitForWarmerTemp(int[] dailyTemps) {
+        int[] daysToWait = new int[dailyTemps.length];
+
+        for(int currentDay = 0; currentDay < dailyTemps.length; currentDay++) {
+            for(int nextDay = currentDay + 1; nextDay < dailyTemps.length; nextDay++) {
+                if(dailyTemps[nextDay] > dailyTemps[currentDay]) {
+                    daysToWait[currentDay] = nextDay - currentDay;
+                    break;
+                }
+            }
+        }
+
+        return daysToWait;
     }
 
 
