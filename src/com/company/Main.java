@@ -535,6 +535,46 @@ public class Main {
     }
 
 
+    /**
+     * Determines if the target array can be formed by merging the given triplets.
+     *
+     * <p>This method checks if a combination of valid triplets can achieve the specified target.
+     * A triplet is deemed valid if each of its elements is less than or equal to the corresponding
+     * element in the target.</p>
+     *
+     * @param triplets An array of 3-element int arrays.
+     * @param target   A 3-element int array to be matched using triplets.
+     * @return True if the target can be achieved by merging valid triplets, otherwise False.
+     */
+    public boolean mergeTriplets(int[][] triplets, int[] target) {
+        int[] result = new int[3];
+
+        for (int[] triplet : triplets) {
+            if (isValidTriplet(triplet, target)) {
+                for (int i = 0; i < 3; i++) {
+                    result[i] = Math.max(triplet[i], result[i]);
+                }
+            }
+        }
+
+        return Arrays.equals(result, target);
+    }
+
+    /**
+     * Checks if a given triplet is valid against the target.
+     *
+     * @param triplet The triplet to be checked.
+     * @param target  The target array.
+     * @return True if the triplet is valid, otherwise False.
+     */
+    private boolean isValidTriplet(int[] triplet, int[] target) {
+        for (int i = 0; i < 3; i++) {
+            if (triplet[i] > target[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 
 
