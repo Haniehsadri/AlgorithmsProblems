@@ -580,3 +580,66 @@ public class Main {
 
 
 }
+
+
+
+
+
+
+    /**
+     * Determines partitions in the input string such that:
+     * - Each letter appears only in one partition.
+     * - Concatenating the partitions results in the original string.
+     *
+     * @param s Input string containing lowercase English letters
+     * @return List of integers, each denoting the length of a partition
+     */
+    public List<Integer> partitionLabels(String s) {
+        List<Integer>  result=new ArrayList<>();
+
+        // get max index
+        int[] indexes=new int[26];
+        Arrays.fill(indexes, -300);
+        for(int i=0;i<s.length();i++){
+
+            if(i>indexes[s.charAt(i)-'a']) {
+                indexes[s.charAt(i)-'a']=i;
+            }
+        }
+
+        for(int i=0;i<26;i++){
+            System.out.println(indexes[i]);
+        }
+
+
+        int i=0;
+
+        int pre=0;
+
+        while(i<s.length()){
+
+
+            int j=indexes[s.charAt(i)-'a'];
+            while(i<=j){
+
+                if(indexes[s.charAt(i)-'a']>j){
+                    j=indexes[s.charAt(i)-'a'];
+
+                }
+
+                i++;
+
+            }
+
+
+            result.add((i-pre));
+            pre=i;
+            i=j+1;
+
+        }
+
+        return result;
+
+
+
+    }
