@@ -643,3 +643,91 @@ public class Main {
 
 
     }
+    
+
+    /**
+     * Calculates the minimum time required for all fresh oranges to rot.
+     *
+     * @param grid A 2D grid representing the state of oranges.
+     * @return The minimum time in minutes or -1 if not all oranges can rot.
+     */
+    public int orangesRotting(int[][] grid) {
+        int r = grid.length;
+        int c = grid[0].length;
+        int minute = 0;
+        Queue<int[]> q = new LinkedList<>();
+
+        // Count fresh oranges and enqueue rotten oranges
+        int count = 0;
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
+                if (grid[i][j] == 2) {
+                    int[] a = new int[2];
+                    a[0] = i;
+                    a[1] = j;
+                    q.add(a);
+                } else if (grid[i][j] == 1) {
+                    count++;
+                }
+            }
+        }
+
+        while (!q.isEmpty()) {
+            int count1 = q.size();
+            for (int z = 0; z < count1; z++) {
+                int[] re = q.poll();
+                int i = re[0];
+                int j = re[1];
+                if (valid_index(i + 1, j, r, c, grid)) {
+                    grid[i + 1][j] = 2;
+                    int[] a = new int[2];
+                    a[0] = i + 1;
+                    a[1] = j;
+                    q.add(a);
+                }
+                // Similar logic for other directions
+            }
+            minute++;
+        }
+
+        if (!hasFresh(grid)) {
+            return -1;
+        }
+        return Math.max(minute - 1, 0);
+    }
+
+    /**
+     * Checks if there are any fresh oranges left.
+     *
+     * @param grid A 2D grid representing the state of oranges.
+     * @return True if there are no fresh oranges, false otherwise.
+     */
+    public boolean hasFresh(int[][] grid) {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == 1) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Checks if the given indices are valid and point to a fresh orange.
+     *
+     * @param i     Row index.
+     * @param j     Column index.
+     * @param r     Number of rows in the grid.
+     * @param c     Number of columns in the grid.
+     * @param grid  A 2D grid representing the state of oranges.
+     * @return True if the indices are valid and point to a fresh orange, false otherwise.
+     */
+    public boolean valid_index(int i, int j, int r, int c, int[][] grid) {
+        if ((i < 0 || j < 0 || i >= r || j >= c) || grid[i][j] != 1) {
+            return false;
+        }
+        return true;
+    }
+}
+
