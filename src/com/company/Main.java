@@ -729,5 +729,59 @@ public class Main {
         }
         return true;
     }
+
+
+
+
+
+
+
+
+
+
+    /**
+     * Given a list of stones, each time we take the two heaviest stones and smash them together.
+     * - If the stones are of the same weight, both stones are destroyed.
+     * - If the stones are of different weights, the smaller stone is destroyed and the remaining
+     *   weight of the larger stone is put back into the list.
+     * This method returns the weight of the last remaining stone, if there is one, or 0 if all stones are destroyed.
+     *
+     * @param stones An array of integers representing the weights of the stones.
+     * @return The weight of the last stone or 0 if all stones are destroyed.
+     */
+    public int lastStoneWeight(int[] stones) {
+
+        List<Integer> result = new ArrayList<>();
+        for (int j : stones) {
+            result.add(j);
+        }
+
+        while (result.size() > 1) {
+            Collections.sort(result);
+            int index1 = result.size() - 1;
+            int index2 = index1 - 1;
+            int y = result.get(index1);
+            int x = result.get(index2);
+
+            if (x == y) {
+                result.remove(index1);
+                result.remove(index2);
+            }
+
+            if (x != y) {
+                int n = y - x;
+                result.remove(index1);
+                result.remove(index2);
+                result.add(n);
+            }
+        }
+
+        if (result.size() == 0) {
+            return 0;
+        } else {
+            return result.get(0);
+        }
+    }
 }
+
 
