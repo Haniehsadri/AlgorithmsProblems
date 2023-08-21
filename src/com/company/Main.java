@@ -774,8 +774,8 @@ public class Main {
      * @return A list of lists containing all unique triplets that sum up to zero.
      */
 
-    class Solution {
-        public List<List<Integer>> threeSum(int[] nums) {
+
+        public List<List<Integer>> threeSum2(int[] nums) {
             Arrays.sort(nums);
 
             int i=0;
@@ -825,7 +825,7 @@ public class Main {
 
         }
 
-    }
+
 
 
 }
