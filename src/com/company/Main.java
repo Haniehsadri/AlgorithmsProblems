@@ -245,10 +245,10 @@ public class Main {
      * Helper method to calculate the number of unique paths from a given position (i, j)
      * to the bottom-right corner in a grid of size m x n.
      *
-     * @param i The current row index.
-     * @param j The current column index.
-     * @param m The number of rows in the grid.
-     * @param n The number of columns in the grid.
+     * @param i    The current row index.
+     * @param j    The current column index.
+     * @param m    The number of rows in the grid.
+     * @param n    The number of columns in the grid.
      * @param memo The memoization array to store previously calculated results.
      * @return The number of unique paths from the current position to the bottom-right corner.
      */
@@ -270,8 +270,6 @@ public class Main {
         memo[i][j] = rightPaths + downPaths;
         return memo[i][j];
     }
-
-
 
 
     /**
@@ -328,7 +326,6 @@ public class Main {
     }
 
 
-
     /**
      * Returns a list of integers representing the elements of a matrix traversed in spiral order.
      *
@@ -375,7 +372,6 @@ public class Main {
 
         return result;
     }
-
 
 
     /**
@@ -426,23 +422,22 @@ public class Main {
     }
 
 
-
     /**
-            * Calculates the number of days to wait for a warmer temperature for each given day.
- *
-         * For each day's temperature in the input array, this method determines how many days
-            * one would have to wait for a temperature that's warmer. If no warmer temperature is
-            * found in the subsequent days, the result for that day is set to 0.
-            *
-            * @param dailyTemps An array of daily temperatures.
-            * @return An array representing the number of days to wait for a warmer temperature for each day.
-            */
+     * Calculates the number of days to wait for a warmer temperature for each given day.
+     * <p>
+     * For each day's temperature in the input array, this method determines how many days
+     * one would have to wait for a temperature that's warmer. If no warmer temperature is
+     * found in the subsequent days, the result for that day is set to 0.
+     *
+     * @param dailyTemps An array of daily temperatures.
+     * @return An array representing the number of days to wait for a warmer temperature for each day.
+     */
     public int[] daysToWaitForWarmerTemp(int[] dailyTemps) {
         int[] daysToWait = new int[dailyTemps.length];
 
-        for(int currentDay = 0; currentDay < dailyTemps.length; currentDay++) {
-            for(int nextDay = currentDay + 1; nextDay < dailyTemps.length; nextDay++) {
-                if(dailyTemps[nextDay] > dailyTemps[currentDay]) {
+        for (int currentDay = 0; currentDay < dailyTemps.length; currentDay++) {
+            for (int nextDay = currentDay + 1; nextDay < dailyTemps.length; nextDay++) {
+                if (dailyTemps[nextDay] > dailyTemps[currentDay]) {
                     daysToWait[currentDay] = nextDay - currentDay;
                     break;
                 }
@@ -451,7 +446,6 @@ public class Main {
 
         return daysToWait;
     }
-
 
 
     /**
@@ -489,8 +483,6 @@ public class Main {
     }
 
 
-
-
     /**
      * Checks if the input string is a palindrome by considering only
      * alphanumeric characters and ignoring cases.
@@ -501,9 +493,9 @@ public class Main {
     public boolean isPalindrome2(String s) {
         StringBuilder pruned = new StringBuilder();
 
-        for(int i = 0; i < s.length(); i++) {
+        for (int i = 0; i < s.length(); i++) {
             char currentChar = s.charAt(i);
-            if(isAlphanumeric(currentChar)) {
+            if (isAlphanumeric(currentChar)) {
                 pruned.append(currentChar);
             }
         }
@@ -577,13 +569,7 @@ public class Main {
     }
 
 
-
-
 }
-
-
-
-
 
 
     /**
@@ -595,35 +581,35 @@ public class Main {
      * @return List of integers, each denoting the length of a partition
      */
     public List<Integer> partitionLabels(String s) {
-        List<Integer>  result=new ArrayList<>();
+        List<Integer> result = new ArrayList<>();
 
         // get max index
-        int[] indexes=new int[26];
+        int[] indexes = new int[26];
         Arrays.fill(indexes, -300);
-        for(int i=0;i<s.length();i++){
+        for (int i = 0; i < s.length(); i++) {
 
-            if(i>indexes[s.charAt(i)-'a']) {
-                indexes[s.charAt(i)-'a']=i;
+            if (i > indexes[s.charAt(i) - 'a']) {
+                indexes[s.charAt(i) - 'a'] = i;
             }
         }
 
-        for(int i=0;i<26;i++){
+        for (int i = 0; i < 26; i++) {
             System.out.println(indexes[i]);
         }
 
 
-        int i=0;
+        int i = 0;
 
-        int pre=0;
+        int pre = 0;
 
-        while(i<s.length()){
+        while (i < s.length()) {
 
 
-            int j=indexes[s.charAt(i)-'a'];
-            while(i<=j){
+            int j = indexes[s.charAt(i) - 'a'];
+            while (i <= j) {
 
-                if(indexes[s.charAt(i)-'a']>j){
-                    j=indexes[s.charAt(i)-'a'];
+                if (indexes[s.charAt(i) - 'a'] > j) {
+                    j = indexes[s.charAt(i) - 'a'];
 
                 }
 
@@ -632,18 +618,17 @@ public class Main {
             }
 
 
-            result.add((i-pre));
-            pre=i;
-            i=j+1;
+            result.add((i - pre));
+            pre = i;
+            i = j + 1;
 
         }
 
         return result;
 
 
-
     }
-    
+
 
     /**
      * Calculates the minimum time required for all fresh oranges to rot.
@@ -716,11 +701,11 @@ public class Main {
     /**
      * Checks if the given indices are valid and point to a fresh orange.
      *
-     * @param i     Row index.
-     * @param j     Column index.
-     * @param r     Number of rows in the grid.
-     * @param c     Number of columns in the grid.
-     * @param grid  A 2D grid representing the state of oranges.
+     * @param i    Row index.
+     * @param j    Column index.
+     * @param r    Number of rows in the grid.
+     * @param c    Number of columns in the grid.
+     * @param grid A 2D grid representing the state of oranges.
      * @return True if the indices are valid and point to a fresh orange, false otherwise.
      */
     public boolean valid_index(int i, int j, int r, int c, int[][] grid) {
@@ -730,20 +715,11 @@ public class Main {
         return true;
     }
 
-
-
-
-
-
-
-
-
-
     /**
      * Given a list of stones, each time we take the two heaviest stones and smash them together.
      * - If the stones are of the same weight, both stones are destroyed.
      * - If the stones are of different weights, the smaller stone is destroyed and the remaining
-     *   weight of the larger stone is put back into the list.
+     * weight of the larger stone is put back into the list.
      * This method returns the weight of the last remaining stone, if there is one, or 0 if all stones are destroyed.
      *
      * @param stones An array of integers representing the weights of the stones.
@@ -782,6 +758,76 @@ public class Main {
             return result.get(0);
         }
     }
+
+
+    /**
+     * Finds all unique triplets in the array which gives the sum of zero.
+     *
+     * <p>The function sorts the array first, then uses two pointers to scan through the sorted array.
+     * If a triplet is found, it's added to a set to ensure uniqueness. The result is then converted
+     * to a list of lists for the output.</p>
+     *
+     * <p>This function assumes that the input list may have duplicates and the output should not contain
+     * any duplicate triplets.</p>
+     *
+     * @param nums The input array of integers.
+     * @return A list of lists containing all unique triplets that sum up to zero.
+     */
+
+    class Solution {
+        public List<List<Integer>> threeSum(int[] nums) {
+            Arrays.sort(nums);
+
+            int i=0;
+            //int j=i+1;
+            //int k=numslength-1;
+            Set<List<Integer>> result = new HashSet<>();
+            while(i<nums.length-2){
+                int j=i+1;
+                int k=nums.length-1;
+
+                while(j<k){
+
+                    if(nums[i]+nums[j]+nums[k]==0){
+                        List<Integer> subre=new ArrayList<>();
+                        subre.add(nums[i]);
+                        subre.add(nums[j]);
+                        subre.add(nums[k]);
+                        result.add(subre);
+                        j++;
+                        k--;
+                    }
+
+                    if(nums[i]+nums[j]+nums[k]<0){
+                        j++;
+
+                    }
+
+                    if(nums[i]+nums[j]+nums[k]> 0){
+                        k--;
+
+                    }
+
+                }
+                i++;
+
+            }
+
+
+            List<List<Integer>>  finalResult=new ArrayList<>();
+
+            for(List<Integer> a: result){
+
+                finalResult.add(a);
+            }
+
+            return finalResult;
+
+        }
+
+    }
+
+
 }
 
 
