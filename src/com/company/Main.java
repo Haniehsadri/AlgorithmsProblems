@@ -775,57 +775,253 @@ public class Main {
      */
 
 
-        public List<List<Integer>> threeSum2(int[] nums) {
-            Arrays.sort(nums);
+    public List<List<Integer>> threeSum2(int[] nums) {
+        Arrays.sort(nums);
 
-            int i=0;
-            //int j=i+1;
-            //int k=numslength-1;
-            Set<List<Integer>> result = new HashSet<>();
-            while(i<nums.length-2){
-                int j=i+1;
-                int k=nums.length-1;
+        int i = 0;
+        //int j=i+1;
+        //int k=numslength-1;
+        Set<List<Integer>> result = new HashSet<>();
+        while (i < nums.length - 2) {
+            int j = i + 1;
+            int k = nums.length - 1;
 
-                while(j<k){
+            while (j < k) {
 
-                    if(nums[i]+nums[j]+nums[k]==0){
-                        List<Integer> subre=new ArrayList<>();
-                        subre.add(nums[i]);
-                        subre.add(nums[j]);
-                        subre.add(nums[k]);
-                        result.add(subre);
-                        j++;
-                        k--;
-                    }
+                if (nums[i] + nums[j] + nums[k] == 0) {
+                    List<Integer> subre = new ArrayList<>();
+                    subre.add(nums[i]);
+                    subre.add(nums[j]);
+                    subre.add(nums[k]);
+                    result.add(subre);
+                    j++;
+                    k--;
+                }
 
-                    if(nums[i]+nums[j]+nums[k]<0){
-                        j++;
-
-                    }
-
-                    if(nums[i]+nums[j]+nums[k]> 0){
-                        k--;
-
-                    }
+                if (nums[i] + nums[j] + nums[k] < 0) {
+                    j++;
 
                 }
-                i++;
+
+                if (nums[i] + nums[j] + nums[k] > 0) {
+                    k--;
+
+                }
 
             }
-
-
-            List<List<Integer>>  finalResult=new ArrayList<>();
-
-            for(List<Integer> a: result){
-
-                finalResult.add(a);
-            }
-
-            return finalResult;
+            i++;
 
         }
 
 
+        List<List<Integer>> finalResult = new ArrayList<>();
+
+        for (List<Integer> a : result) {
+
+            finalResult.add(a);
+        }
+
+        return finalResult;
+
+    }
+
+
+class Solution {
+    public int orangesRotting(int[][] grid) {
+        int r = grid.length;
+        int c = grid[0].length;
+        int minute = 0;
+        Queue<int[]> q = new LinkedList<>();
+        int count = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == 2) {
+                    int[] a = new int[2];
+                    a[0] = i;
+                    a[1] = j;
+                    q.add(a);
+                }
+            }
+        }
+
+
+        while (!q.isEmpty()) {
+
+            int count1 = q.size();
+            for (int z = 0; z < count1; z++) {
+
+                int[] re = q.poll();
+                int i = re[0];
+                int j = re[1];
+                if (valid_index(i + 1, j, r, c, grid)) {
+                    grid[i + 1][j] = 2;
+                    int[] a = new int[2];
+                    a[0] = i + 1;
+                    a[1] = j;
+                    q.add(a);
+
+                }
+
+                if (valid_index(i, j + 1, r, c, grid)) {
+                    grid[i][j + 1] = 2;
+                    int[] a = new int[2];
+                    a[0] = i;
+                    a[1] = j + 1;
+                    q.add(a);
+
+                }
+
+                if (valid_index(i - 1, j, r, c, grid)) {
+                    grid[i - 1][j] = 2;
+                    int[] a = new int[2];
+                    a[0] = i - 1;
+                    a[1] = j;
+                    q.add(a);
+
+                }
+
+                if (valid_index(i, j - 1, r, c, grid)) {
+                    grid[i][j - 1] = 2;
+                    int[] a = new int[2];
+                    a[0] = i;
+                    a[1] = j - 1;
+                    q.add(a);
+
+                }
+
+            }
+
+            minute++;
+        }
+
+
+        if (!hasFresh(grid)) {
+            return -1;
+        }
+        return Math.max(minute - 1, 0);
+
+
+    }
+
+    public boolean hasFresh(int[][] grid) {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == 1) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+
+    public boolean valid_index(int i, int j, int r, int c, int[][] grid) {
+        if ((i < 0 || j < 0 || i >= r || j >= c) || grid[i][j] != 1) {
+            return false;
+        }
+
+        return true;
+    }
+
+}
+
+
+    /**
+     * Calculates the maximum area of an island in the given grid. An island is represented by 1s
+     * and is surrounded by water represented by 0s. The grid is considered wrap around,
+     * so an island can wrap around the edges.
+     *
+     * @param grid 2D matrix where:
+     *             0: Represents water
+     *             1: Represents land (part of an island)
+     * @return Maximum area of an island present in the grid.
+     */
+
+
+    public int maxAreaOfIsland(int[][] grid) {
+
+        Queue<int[]> q = new LinkedList<>();
+        int r = grid.length;
+        int c = grid[0].length;
+
+
+        int max = -300;
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
+                int count = 0;
+                if (grid[i][j] == 1) {
+                    int[] a = new int[2];
+                    a[0] = i;
+                    a[1] = j;
+                    q.add(a);
+                    grid[i][j] = 2;
+                    while (!q.isEmpty()) {
+                        int[] current = q.poll();
+                        count++;
+                        int z = current[0];
+                        int k = current[1];
+                        if (valid_index(z + 1, k, r, c, grid)) {
+                            grid[z + 1][k] = 2;
+                            a = new int[2];
+                            a[0] = z + 1;
+                            a[1] = k;
+                            q.add(a);
+
+                        }
+
+                        if (valid_index(z, k + 1, r, c, grid)) {
+                            grid[z][k + 1] = 2;
+                            a = new int[2];
+                            a[0] = z;
+                            a[1] = k + 1;
+                            q.add(a);
+
+                        }
+
+                        if (valid_index(z - 1, k, r, c, grid)) {
+                            grid[z - 1][k] = 2;
+                            a = new int[2];
+                            a[0] = z - 1;
+                            a[1] = k;
+                            q.add(a);
+
+                        }
+
+                        if (valid_index(z, k - 1, r, c, grid)) {
+                            grid[z][k - 1] = 2;
+                            a = new int[2];
+                            a[0] = z;
+                            a[1] = k - 1;
+                            q.add(a);
+
+                        }
+
+
+                    }
+
+
+                }
+
+                if (count > max) {
+                    max = count;
+                }
+            }
+
+
+        }
+
+        return max;
+    }
+
+
+    public boolean valid_index(int i, int j, int r, int c, int[][] grid) {
+        if ((i < 0 || j < 0 || i >= r || j >= c || grid[i][j] != 1)) {
+            return false;
+        }
+
+        return true;
+    }
 
 
 }
