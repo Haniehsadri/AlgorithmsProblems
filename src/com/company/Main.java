@@ -1023,6 +1023,41 @@ class Solution {
         return true;
     }
 
+    /**
+     * Constructs a new TreeNode with a given value, left child, and right child.
+     *
+     * @param val the value to be stored in the TreeNode
+     * @param left the left child of the TreeNode
+     * @param right the right child of the TreeNode
+     */
+    
+    public boolean isBalanced(TreeNode root) {
+        int a= calculate_max( root);
+        if(a==-1){
+            return false;
+        }
+        return true;
+    }
+
+
+    public int calculate_max(TreeNode root){
+        if(root==null){
+            return 0;
+        }
+
+        if(calculate_max(root.left)==-1 ||calculate_max(root.right)==-1){
+            return -1;
+        }
+
+        if(Math.abs(calculate_max(root.left)-calculate_max(root.right))>1){
+            return -1;
+        }
+
+
+        return Math.max (calculate_max(root.left),calculate_max(root.right))+1 ;
+    }
+
+
 
 }
 
