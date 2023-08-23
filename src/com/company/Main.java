@@ -1056,6 +1056,51 @@ class Solution {
 
         return Math.max (calculate_max(root.left),calculate_max(root.right))+1 ;
     }
+    
+    /**
+     * Clones the given graph starting from a given node.
+     *
+     * @param node The starting node of the graph.
+     * @return The starting node of the cloned graph or null if the input node is null.
+     */
+
+    public HashMap<Integer,Node> visited;
+    public Node cloneGraph(Node node) {
+        if(node==null){
+            return null;
+        }
+        visited=new HashMap<>();
+
+        return make_clone(node);
+
+    }
+
+
+    public Node make_clone(Node n){
+
+
+        Node newNode=new Node(n.val);
+
+        visited.put(n.val,newNode);
+        ArrayList<Node> new_adj = new ArrayList<Node>();
+
+        for(Node v:n.neighbors){
+
+            if(visited.containsKey(v.val)){
+                new_adj.add(visited.get(v.val));
+            }
+            else{
+                new_adj.add(make_clone( v));}
+        }
+
+        newNode.neighbors=new_adj;
+
+        return newNode;}
+
+
+
+
+
 
 
 
