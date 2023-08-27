@@ -1097,6 +1097,79 @@ class Solution {
 
         return newNode;}
 
+    //Binary Tree IS Valid
+
+
+    public boolean isValidBST(TreeNode root) {
+        Queue < TreeNode> q=new LinkedList<>();
+        q.add(root);
+        int rightMin;
+        int leftMax;
+        while(!q.isEmpty()){
+            TreeNode current=q.poll();
+
+            if(current.right!=null){
+                q.add(current.right);
+                rightMin=helper2(current.right);
+                if(rightMin<=current.val){
+                    return false;
+                }
+
+
+            }
+
+            if(current.left!=null){
+                q.add(current.left);
+                leftMax=helper1(current.left);
+                if(leftMax>=current.val){
+                    return false;
+                }
+
+            }
+
+
+        }
+
+        return true;
+
+    }
+
+    public int  helper1(TreeNode root) {
+
+        if(root==null){
+            return Integer.MIN_VALUE;
+        }
+        return Math.max(Math.max(helper1(root.right) ,helper1(root.left)),root.val);
+
+    }
+
+
+
+    public int  helper2(TreeNode root) {
+
+        if(root==null){
+            return Integer.MAX_VALUE;
+        }
+
+        return Math.min(Math.min(helper2(root.right) ,helper2(root.left)),root.val);
+
+    }
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
