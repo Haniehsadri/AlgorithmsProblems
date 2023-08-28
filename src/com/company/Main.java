@@ -1156,24 +1156,48 @@ class Solution {
     }
 
 
+   //checks if the string s1 is a permutation of a substring in s2 
+    public boolean checkInclusion(String s1, String s2) {
+        if (s1.length() > s2.length()) return false;
 
+        int len = s1.length();
+        int[] count = new int[26];
 
+        // Populate the frequency counter for s1
+        for (int i = 0; i < len; i++) {
+            count[s1.charAt(i) - 'a']++;
+        }
+
+        for (int j = 0; j < s2.length(); j++) {
+            // Subtract count for the current character in s2
+            count[s2.charAt(j) - 'a']--;
+
+            // If we have processed `len` characters, add count for the character that's going out of the window
+            if (j >= len) {
+                count[s2.charAt(j - len) - 'a']++;
+            }
+
+            // If all values in count are zeros, it means s1 is a permutation of the current window in s2
+            if (isAllZero(count)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isAllZero(int[] count) {
+        for (int i : count) {
+            if (i != 0) return false;
+        }
+        return true;
+    }
 }
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
+}
 
 
 
